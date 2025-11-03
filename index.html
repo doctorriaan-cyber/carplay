@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Live Camera & Mic Feed</title>
+    <title>Live Camera Feed</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -62,7 +62,6 @@
                 try {
                     const mediaStream = await navigator.mediaDevices.getUserMedia({
                         video: { facingMode: 'user' },
-                        audio: true,
                     });
                     setStream(mediaStream);
                     setPermissionStatus('granted');
@@ -72,7 +71,7 @@
                 } catch (err) {
                     console.error("Error accessing media devices.", err);
                     if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
-                        setError("Permission denied. Please allow camera and microphone access in your browser settings.");
+                        setError("Permission denied. Please allow camera access in your browser settings.");
                     } else {
                         setError(`An error occurred: ${err.name}. This may be because another app is using the camera or access is restricted.`);
                     }
@@ -142,7 +141,7 @@
                             <div className="text-center p-8 flex flex-col justify-center items-center h-full">
                                 <h2 className="text-2xl font-bold text-red-400 mb-4">Access Denied</h2>
                                 <p className="text-gray-300 max-w-md">{error}</p>
-                                <p className="text-gray-400 mt-4 text-sm">You may need to go into your iPhone's Settings &gt; Chrome &gt; and enable Camera and Microphone access.</p>
+                                <p className="text-gray-400 mt-4 text-sm">You may need to go into your iPhone's Settings &gt; Chrome &gt; and enable Camera access.</p>
                                 <button
                                     onClick={handleRequestPermissions}
                                     className="mt-8 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition-colors"
